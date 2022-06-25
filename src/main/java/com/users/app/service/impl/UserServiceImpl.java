@@ -51,14 +51,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO upgradeUser(UserDTO userDTO, Long id) {
+    public UserDTO updateUser(UserDTO userDTO, Long id) {
 
         User user = userRepository.findById(id).orElseThrow(() -> new
                 ResourceNotFound("User", "id",id));
 
         user.setIdentification(userDTO.getIdentification());
         user.setName(userDTO.getName());
-        user.setEmail(user.getEmail());
+        user.setEmail(userDTO.getEmail());
 
         User updateUser = userRepository.save(user);
 
@@ -72,8 +72,6 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new
                 ResourceNotFound("User", "id",id));
         userRepository.delete(user);
-
-
 
     }
 
